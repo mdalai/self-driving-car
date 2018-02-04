@@ -17,11 +17,11 @@ bayesianFilter::bayesianFilter() {
     //TODO add is_initialized to header file
     //set initialization to false:
     // NOTE: helps us set up the initial believe state
-	//is_initialized_ = 
+	is_initialized_ = false;
 
     //TODO add control_std to header file
 	//set standard deviation of control to 1.0f:
-	//control_std = 
+	control_std = 1.0f;
 
 	//define size of believe, same size as map
 	bel_x.resize(100,0);
@@ -29,7 +29,7 @@ bayesianFilter::bayesianFilter() {
 	//TODO add bel_x_init to header file
 	// NOTE: helps us not overwrite believe during
 	// the motion calculation
-	//bel_x_init
+	bel_x_init.resize(100,0);
 
 }
 
@@ -45,13 +45,14 @@ void bayesianFilter::process_measurement(const MeasurementPackage &measurements,
 	/******************************************************************************
 	 *  Set init belief of state vector:
 	 ******************************************************************************/
-	 //if(!is_initialized_){
+	if(!is_initialized_){
 
 		//TODO: run over map, all map_1d.lanmark_list values:
-		//for (int l=0; l< ...){
+		for (int l=0; l< map_1d.lanmark_list.size(); l++){
 
 			//TODO: get landmark l from map 
-			
+			map::single_landmark_s landmark_temp;
+			landmark_temp = map_1d.landmark_list[l];			
 
 			//check, if landmark position x fits in map [0,100]:
 			//if(... ){
